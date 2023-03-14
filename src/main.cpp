@@ -3,9 +3,11 @@
 #include <fstream>
 #include <sstream>
 
-#include "lpm.h"
+#include "LongestPrefixMatcher.h"
+
 
 int main(int argc, char *argv[]) {
+
 
 
     if (argc < 3) {
@@ -21,6 +23,8 @@ int main(int argc, char *argv[]) {
         std::cout << "Unable to open file" << std::endl;
         exit(EXIT_FAILURE);
     }
+
+    LongestPrefixMatcher matcher;
     while (std::getline(routeFile, line)) {
 
         std::stringstream st(line);
@@ -30,7 +34,7 @@ int main(int argc, char *argv[]) {
 
 
         int ipBinary = d + (c << 8) + (b << 16) + (a << 24);
-        add(ipBinary, prefixLen, port);
+        matcher.add(ipBinary, prefixLen, port);
     }
     routeFile.close();
 
@@ -47,7 +51,7 @@ int main(int argc, char *argv[]) {
         char ch;
         st >> a >> ch >> b >> ch >> c >> ch >> d;
         int ipBinary = d + (c << 8) + (b << 16) + (a << 24);
-        std::cout << lookup(ipBinary) << "\n";
+        std::cout << matcher.lookup(ipBinary) << "\n";
     }
     routeFile.close();
 }

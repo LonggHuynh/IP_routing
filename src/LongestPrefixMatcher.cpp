@@ -1,16 +1,8 @@
 
-
-#include <stdint.h>
-#include <stdio.h>
+#include "LongestPrefixMatcher.h"
 
 
-struct Trie {
-    int port = -1;
-    Trie *subTrie[2] = {nullptr, nullptr};
-} ipTrie;
-
-
-void add(int ip, int prefix_length, int port_number) {
+void LongestPrefixMatcher::add(int ip, int prefix_length, int port_number) {
     Trie *node = &ipTrie;
 
     for (int i = 31, j = 0; j < prefix_length; i--, j++) {
@@ -26,15 +18,13 @@ void add(int ip, int prefix_length, int port_number) {
     node->port = port_number;
 }
 
-
-int lookup(int ip) {
+int LongestPrefixMatcher::lookup(int ip) {
     Trie *node = &ipTrie;
     int port = -1;
 
     for (int i = 31; node != nullptr; i--) {
         if (node->port >= 0) port = node->port;
-        node = node->subTrie[ip >>  i & 1];
+        node = node->subTrie[ip >> i & 1];
     }
     return port;
 }
-
