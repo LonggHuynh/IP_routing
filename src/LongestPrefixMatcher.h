@@ -1,4 +1,5 @@
-
+#ifndef LONGESTPREFIXMATCHER_H
+#define LONGESTPREFIXMATCHER_H
 
 #include <stdint.h>
 #include <stdio.h>
@@ -13,4 +14,4 @@ public:
     int lookup(int ip);
 };
 
-
+#endif
