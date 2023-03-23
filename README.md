@@ -10,7 +10,7 @@ To run you need to have a file containing all network and a port mapped to that 
 you have that, compile the C++ file. For example, the command
     
     
-    g++ -O3 -std=c++17 -o main main.cpp
+    g++ -std=c++17  *.cpp
 
 then run by 
 
